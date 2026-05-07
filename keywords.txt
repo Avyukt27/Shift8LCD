@@ -1,1 +1,6 @@
-
+Shift8LCD KEYWORD1
+begin KEYWORD2
+print KEYWORD2
+write KEYWORD2
+setCursor KEYWORD2
+clear KEYWORD2
