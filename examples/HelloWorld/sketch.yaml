@@ -1,0 +1,6 @@
+default_fqbn: arduino:avr:uno
+default_port: /dev/ttyACM0
+build_path: ./build
+dump_profile: true
+compiler:
+  optimization_flags: -Os
