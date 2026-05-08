@@ -20,10 +20,10 @@ void Shift8LCD::begin(bool twoLines, bool fontHeight, bool cursor, bool blink) {
   byte displayControlFlags = 3 << 2 | cursor | blink;
 
   delay(50);
-  send(functionSetFlags, false);    // Function set
-  send(displayControlFlags, false); // Display control - 0b1DCB
+  send(functionSetFlags, IS_INSTRUCTION);    // Function set
+  send(displayControlFlags, IS_INSTRUCTION); // Display control - 0b1DCB
   clear();
-  send(0x06, false); // Entry mode set
+  send(0x06, IS_INSTRUCTION); // Entry mode set
 }
 
 void Shift8LCD::send(byte value, bool isData) {
@@ -40,11 +40,11 @@ void Shift8LCD::send(byte value, bool isData) {
   delay(2);
 }
 
-void Shift8LCD::clear() { send(0x01, false); }
+void Shift8LCD::clear() { send(0x01, IS_INSTRUCTION); }
 
 void Shift8LCD::setCursor(uint8_t col, uint8_t row) {
   byte address = (row == 0) ? col : (0x40 + col);
-  send(0x80 | address, false);
+  send(0x80 | address, IS_INSTRUCTION);
 }
 
 size_t Shift8LCD::write(uint8_t character) {
