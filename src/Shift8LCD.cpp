@@ -48,6 +48,6 @@ void Shift8LCD::setCursor(uint8_t col, uint8_t row) {
 }
 
 size_t Shift8LCD::write(uint8_t character) {
-  send(character, true);
+  send(character);
   return 1;
 }
