@@ -1,6 +1,7 @@
 #include "Shift8LCD.h"
 
-Shift8LCD::Shift8LCD(int data, int clock, int latch, int mode, int enable) {
+Shift8LCD::Shift8LCD(uint8_t data, uint8_t clock, uint8_t latch, uint8_t mode,
+                     uint8_t enable) {
   _dataPin = data;
   _clockPin = clock;
   _latchPin = latch;
@@ -19,13 +20,13 @@ void Shift8LCD::begin(bool twoLines, bool fontHeight, bool cursor, bool blink) {
   byte displayControlFlags = 3 << 2 | cursor | blink;
 
   delay(5);
-  write(functionSetFlags, false);    // Function set
-  write(displayControlFlags, false); // Display control - 0b1DCB
+  send(functionSetFlags, false);    // Function set
+  send(displayControlFlags, false); // Display control - 0b1DCB
   clear();
-  write(0x06, false); // Entry mode set
+  send(0x06, false); // Entry mode set
 }
 
-void Shift8LCD::write(byte value, bool isData) {
+void Shift8LCD::send(byte value, bool isData) {
   digitalWrite(_modePin, isData);
 
   digitalWrite(_latchPin, LOW);
@@ -39,15 +40,14 @@ void Shift8LCD::write(byte value, bool isData) {
   delay(2);
 }
 
-void Shift8LCD::clear() { write(0x01, false); }
+void Shift8LCD::clear() { send(0x01, false); }
 
-void Shift8LCD::setCursor(int col, int row) {
+void Shift8LCD::setCursor(uint8_t col, uint8_t row) {
   byte address = (row == 0) ? col : (0x40 + col);
-  write(0x80 | address, false);
+  send(0x80 | address, false);
 }
 
-void Shift8LCD::print(const char *text) {
-  while (*text) {
-    write(*text++, true);
-  }
+size_t Shift8LCD::write(uint8_t character) {
+  send(character, true);
+  return 1;
 }
