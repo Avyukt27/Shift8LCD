@@ -19,7 +19,7 @@ void Shift8LCD::begin(bool twoLines, bool fontHeight, bool cursor, bool blink) {
   byte functionSetFlags = 3 << 4 | twoLines | fontHeight;
   byte displayControlFlags = 3 << 2 | cursor | blink;
 
-  delay(5);
+  delay(50);
   send(functionSetFlags, false);    // Function set
   send(displayControlFlags, false); // Display control - 0b1DCB
   clear();

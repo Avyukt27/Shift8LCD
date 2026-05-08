@@ -12,6 +12,9 @@
 #define LCD_BLINKOFF false
 #define LCD_BLINKON true
 
+#define IS_DATA true
+#define IS_INSTRUCTION true
+
 class Shift8LCD : public Print {
 public:
   Shift8LCD(uint8_t data, uint8_t clock, uint8_t latch, uint8_t mode,
@@ -26,5 +29,5 @@ public:
 private:
   int _dataPin, _clockPin, _latchPin, _modePin, _enablePin;
   void sendToRegister(byte data);
-  void send(byte value, bool isData);
+  void send(byte value, bool isData = IS_DATA);
 };
