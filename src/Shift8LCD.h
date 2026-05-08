@@ -17,7 +17,8 @@ public:
   Shift8LCD(uint8_t data, uint8_t clock, uint8_t latch, uint8_t mode,
             uint8_t enable);
 
-  void begin(bool twoLines, bool fontHeight, bool cursor, bool blink);
+  void begin(bool twoLines = LCD_TWOLINES, bool fontHeight = LCD_FONTHEIGHT11,
+             bool cursor = LCD_CURSORFF, bool blink = LCD_BLINKOFF);
   void clear();
   void setCursor(uint8_t col, uint8_t row);
   virtual size_t write(uint8_t character) override;
