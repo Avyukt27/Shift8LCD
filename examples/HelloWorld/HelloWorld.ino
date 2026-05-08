@@ -3,7 +3,7 @@
 Shift8LCD lcd(11, 12, 8, 7, 9);
 
 void setup() {
-  lcd.begin();
+  lcd.begin(true, true, true, true);
 }
 
 void loop() {

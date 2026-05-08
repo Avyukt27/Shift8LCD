@@ -6,7 +6,7 @@ class Shift8LCD {
 public:
   Shift8LCD(int data, int clock, int latch, int mode, int enable);
 
-  void begin();
+  void begin(bool twoLines, bool fontHeight, bool cursor, bool blink);
   void print(const char *text);
   void clear();
   void setCursor(int col, int row);

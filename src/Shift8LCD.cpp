@@ -8,18 +8,21 @@ Shift8LCD::Shift8LCD(int data, int clock, int latch, int mode, int enable) {
   _enablePin = enable;
 }
 
-void Shift8LCD::begin() {
+void Shift8LCD::begin(bool twoLines, bool fontHeight, bool cursor, bool blink) {
   pinMode(_dataPin, OUTPUT);
   pinMode(_clockPin, OUTPUT);
   pinMode(_latchPin, OUTPUT);
   pinMode(_modePin, OUTPUT);
   pinMode(_enablePin, OUTPUT);
 
+  byte functionSetFlags = 3 << 4 | twoLines | fontHeight;
+  byte displayControlFlags = 3 << 2 | cursor | blink;
+
   delay(5);
-  write(0x38, false);
-  write(0x0c, false);
+  write(functionSetFlags, false);    // Function set
+  write(displayControlFlags, false); // Display control - 0b1DCB
   clear();
-  write(0x06, false);
+  write(0x06, false); // Entry mode set
 }
 
 void Shift8LCD::write(byte value, bool isData) {
